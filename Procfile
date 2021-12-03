@@ -1,1 +1,1 @@
-web: qunicorn project4.wsgi
+web: gunicorn myproject.wsgi
