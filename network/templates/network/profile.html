@@ -1,0 +1,35 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% block body %}
+    <div id="profile" class="row mb-2">
+        <div class="col">
+            <div class="row g-0 border rounded">
+                <div class="col p-4 d-flex flex-column">
+                    {% if user.id != profile_user_id %}
+                        {% csrf_token %}
+                        {% if is_follower %}
+                            <button id="unfollowing_btn" onclick="following('{{ profile_user_id }}', '{{ followers_count }}')" class="btn btn-primary col-2">Unfollow</button>
+                            <button id="follow_btn" onclick="following('{{ profile_user_id }}', '{{ followers_count }}')" class="btn btn-secondary col-2" style="display: none;">Following</button>
+                        {% else %}
+                            <button id="unfollowing_btn" onclick="following('{{ profile_user_id }}', '{{ followers_count }}')" class="btn btn-primary col-2" style="display: none;">Unfollow</button>
+                            <button id="follow_btn" onclick="following('{{ profile_user_id }}', '{{ followers_count }}')" class="btn btn-secondary col-2">Following</button>
+                        {% endif %}
+                    {% endif %}
+                    <h3 class="mb-0">{{ profile_username }}</h3>
+                    <div class="row">
+                        <div id="followers_count" class="col mb-1 text-muted">Followers: {{ followers_count }}</div>
+                        <div id="subscribe_count" class="col mb-1 text-muted">Subscribe: {{ subscribes_count }}</div>
+                    </div>
+                    <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                    <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id='posts'>
+    </div>
+    <script src="{% static 'network/js/index.js' %}"></script>        
+{% endblock %}
+

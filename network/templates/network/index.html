@@ -1,0 +1,28 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% block body %}
+    <div id="index_page">
+        {% if user.is_authenticated %}  
+            <div id="new_post">
+                <form class='col w-30 border border-primary' onsubmit="add_new_post()">
+                    {% csrf_token %}
+                    <h4 class='col-3'>New Post</h4>
+                    <hr>
+                    <input id='new_post_title' name='new_post_title' class='col-3 form-control' placeholder='Post title' value required>
+                    <textarea class='col-12 form-control' id='new_post_content' name='new_post_content' placeholder='Post content' value requered></textarea>
+                    <hr>
+                    <button class='col-1 btn btn-primary' type='submit'>Add Post</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+    <div id='posts'>
+    </div>
+    <nav id="navbar_pagination">
+        <ul class="pagination" id="pagination">
+            <li id="previous_page" class="page-item" style="display: block;"><button class="btn btn-primary" onclick="pages('-1')">Previous</button></li>
+            <li id="next_page" class="page-item" style="display: block;"><button class="btn btn-primary" onclick="pages('1')">Next</button></li>
+        </ul>
+      </nav>
+    <script src="{% static 'network/js/index.js' %}"></script>        
+{% endblock %}
