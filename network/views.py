@@ -129,10 +129,11 @@ def get_posts(request):
         paginator = Paginator(posts, page_number)
         page_number = request.POST.get('page_number')
         page_obj = paginator.get_page(page_number)
+        posts_number = posts.count()
         posts = return_data_in_post(page_obj)
         return JsonResponse({'posts': posts,
                                 'current_page': page_number,
-                                'last_page': last_page,},
+                                'last_page': last_page, },
                                 status=201)
     return JsonResponse({'posts': None},
                                 status=400)

@@ -39,15 +39,18 @@ async function get_posts() {
         filter = filter
         current_page = post_list['current_page']
 
-        if (current_page <= 1) document.querySelector('#previous_page').style.display = 'none'
-        else document.querySelector('#previous_page').style.display = 'block'
+        try {
+            if (current_page <= 1) document.querySelector('#previous_page').style.display = 'none'
+            else document.querySelector('#previous_page').style.display = 'block'
+        }catch {}
     
-        if (current_page == post_list['last_page']) document.querySelector('#next_page').style.display = 'none'
-        else document.querySelector('#next_page').style.display = 'block'
-
+        try {
+            if (current_page == post_list['last_page']) document.querySelector('#next_page').style.display = 'none'
+            else document.querySelector('#next_page').style.display = 'block'
+        }catch{}
         return post_list['posts'];
     } catch (error) {
-        console.error(error);
+        console.log(error);
     }
 }
 
@@ -57,7 +60,9 @@ async function generate_post_list() {
         post.remove();
     })
 
-    document.querySelector('#new_post').style.display = 'block'
+    try {
+        document.querySelector('#new_post').style.display = 'block'
+    }catch{}
     const user_id = JSON.parse(document.getElementById("user_id").textContent);
 
     posts = await get_posts(); 
